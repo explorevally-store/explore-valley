@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123c32">
+<title>Explore Valley | অনলাইন শপ</title>
+<style>
+:root{--green:#123c32;--green2:#1e6552;--cream:#f7f6f0;--gold:#e9b95b;--ink:#17231f;--muted:#65736d;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
+header{background:linear-gradient(125deg,#0d3028,#1d6651);color:white;padding:24px 18px 30px}
+.wrap{max-width:1100px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-size:24px;font-weight:800;letter-spacing:.2px}.tag{font-size:13px;color:#dce9e2}
+.hero{padding:34px 0 8px}.hero h1{font-size:clamp(28px,5vw,44px);margin:0 0 8px}.hero p{margin:0;color:#e2eee8}
+main{max-width:1100px;margin:24px auto;padding:0 16px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+input,textarea,select,button{font:inherit}input,textarea,select{width:100%;padding:12px 13px;border:1px solid #d8dfd9;border-radius:12px;background:white;color:var(--ink)}
+.search{flex:1;min-width:200px}.btn{border:0;border-radius:12px;padding:12px 17px;background:var(--green);color:white;font-weight:700;cursor:pointer}.btn.secondary{background:#e7eee9;color:var(--green)}.btn.gold{background:var(--gold);color:#2b2416}
+.layout{display:grid;grid-template-columns:310px 1fr;gap:22px;align-items:start}
+.panel{background:white;border:1px solid #e5e9e4;border-radius:18px;padding:18px;box-shadow:0 5px 20px #193d2c0a}
+.panel h2{font-size:19px;margin:0 0 14px}.field{margin:0 0 12px}.field label{display:block;font-size:13px;font-weight:700;margin:0 0 6px;color:#42534b}
+textarea{min-height:78px;resize:vertical}.hint{font-size:12px;color:var(--muted);line-height:1.5}.products-head{display:flex;align-items:center;justify-content:space-between;margin:2px 0 14px}.products-head h2{margin:0;font-size:21px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{background:white;border:1px solid #e5e9e4;border-radius:17px;overflow:hidden;box-shadow:0 5px 18px #193d2c0a}
+.photo{height:175px;background:#e8eee9;display:flex;align-items:center;justify-content:center;color:#7b8981;font-size:13px;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}
+.info{padding:13px}.category{font-size:11px;color:var(--green2);font-weight:800}.info h3{margin:5px 0;font-size:17px}.desc{font-size:13px;color:var(--muted);min-height:35px;line-height:1.45}.price{font-size:20px;font-weight:850;color:var(--green);margin:9px 0}.stock{font-size:12px;color:var(--muted)}.card-actions{display:flex;gap:7px;margin-top:10px}.small{padding:8px 10px;font-size:12px;border-radius:9px}.delete{background:#fff0ef;color:#a8322b}
+.empty{padding:35px 15px;text-align:center;color:var(--muted);background:white;border:1px dashed #cbd6ce;border-radius:16px;grid-column:1/-1}
+footer{text-align:center;color:var(--muted);padding:28px 16px;font-size:12px}
+#notice{display:none;margin:0 0 15px;padding:10px 12px;background:#e7f3eb;color:#1d5a3d;border-radius:10px;font-size:13px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:9px}.photo{height:130px}.info{padding:10px}.info h3{font-size:15px}.price{font-size:17px}.card-actions{flex-direction:column}.top{align-items:flex-start}.hero{padding-top:26px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <div class="top"><div><div class="brand">🌿 Explore Valley</div><div class="tag">আপনার পছন্দের সবকিছু, এক ঠিকানায়</div></div><div class="tag">অনলাইন শপিং প্ল্যাটফর্ম</div></div>
+  <section class="hero"><h1>পছন্দের পণ্য খুঁজুন সহজেই</h1><p>পণ্য দেখুন, দাম জানুন এবং আপনার পছন্দের জিনিসটি বেছে নিন।</p></section>
+ </div>
+</header>
+<main>
+ <div id="notice"></div>
+ <div class="tools"><input id="search" class="search" placeholder="পণ্যের নাম লিখে খুঁজুন..."><select id="filter" style="max-width:190px"><option value="">সব ক্যাটাগরি</option><option>ফ্যাশন</option><option>ইলেকট্রনিক্স</option><option>ঘরোয়া সামগ্রী</option><option>লাইফস্টাইল</option><option>অন্যান্য</option></select></div>
+ <div class="layout">
+  <aside class="panel">
+   <h2>＋ নতুন পণ্য যোগ করুন</h2>
+   <form id="productForm">
+    <div class="field"><label for="name">পণ্যের নাম *</label><input id="name" required maxlength="70" placeholder="যেমন: স্মার্ট ঘড়ি"></div>
+    <div class="field"><label for="price">দাম (টাকা) *</label><input id="price" required type="number" min="1" step="1" placeholder="যেমন: ১৫০০"></div>
+    <div class="field"><label for="category">ক্যাটাগরি</label><select id="category"><option>অন্যান্য</option><option>ফ্যাশন</option><option>ইলেকট্রনিক্স</option><option>ঘরোয়া সামগ্রী</option><option>লাইফস্টাইল</option></select></div>
+    <div class="field"><label for="description">পণ্যের বিবরণ</label><textarea id="description" maxlength="300" placeholder="পণ্যের বৈশিষ্ট্য লিখুন..."></textarea></div>
+    <div class="field"><label for="photo">পণ্যের ছবি</label><input id="photo" type="file" accept="image/*"><div class="hint">পরিষ্কার ছবি দিলে ক্রেতারা পণ্য বুঝতে সুবিধা পাবেন।</div></div>
+    <button class="btn" type="submit" style="width:100%">পণ্য প্রকাশ করুন</button>
+   </form>
+   <p class="hint" style="margin-bottom:0">নোট: এই প্রাথমিক সংস্করণে পণ্য আপনার এই ডিভাইসের ব্রাউজারে সংরক্ষিত হবে। সবার জন্য অনলাইনে প্রকাশ করতে হোস্টিং ও ডেটাবেস যুক্ত করতে হবে।</p>
+  </aside>
+  <section>
+   <div class="products-head"><h2>আমাদের পণ্যসমূহ</h2><span class="hint" id="count">০টি পণ্য</span></div>
+   <div class="grid" id="products"></div>
+  </section>
+ </div>
+</main>
+<footer>© <span id="year"></span> Explore Valley · আপনার পছন্দ, আমাদের অগ্রাধিকার</footer>
+<script>
+const KEY='explore_valley_products_v1';
+let products=[];
+try{products=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){products=[]}
+const $=id=>document.getElementById(id);
+const money=n=>'৳ '+Number(n).toLocaleString('bn-BD');
+function save(){try{localStorage.setItem(KEY,JSON.stringify(products));showNotice('পণ্যটি এই ডিভাইসে সংরক্ষিত হয়েছে।')}catch(e){showNotice('ছবিটি অনেক বড়। ছোট ছবি দিয়ে আবার চেষ্টা করুন।')}}
+function showNotice(msg){$('notice').textContent=msg;$('notice').style.display='block';setTimeout(()=>$('notice').style.display='none',3500)}
+function render(){
+ const q=$('search').value.trim().toLowerCase(),cat=$('filter').value;
+ const list=products.filter(p=>(!cat||p.category===cat)&&(!q||(p.name+' '+p.description).toLowerCase().includes(q)));
+ $('count').textContent=products.length.toLocaleString('bn-BD')+'টি পণ্য';
+ $('products').innerHTML='';
+ if(!list.length){$('products').innerHTML='<div class="empty">এখনো কোনো পণ্য যোগ করা হয়নি।<br>বাম পাশের ফর্ম থেকে প্রথম পণ্যটি যোগ করুন।</div>';return}
+ list.forEach(p=>{
+  const card=document.createElement('article');card.className='card';
+  const photo=document.createElement('div');photo.className='photo';
+  if(p.photo){const img=document.createElement('img');img.src=p.photo;img.alt=p.name;photo.append(img)}else photo.textContent='পণ্যের ছবি নেই';
+  const info=document.createElement('div');info.className='info';
+  const category=document.createElement('div');category.className='category';category.textContent=p.category;
+  const title=document.createElement('h3');title.textContent=p.name;
+  const desc=document.createElement('div');desc.className='desc';desc.textContent=p.description||'বিস্তারিত জানতে যোগাযোগ করুন।';
+  const price=document.createElement('div');price.className='price';price.textContent=money(p.price);
+  const stock=document.createElement('div');stock.className='stock';stock.textContent='মূল্য প্রযোজ্য';
+  const actions=document.createElement('div');actions.className='card-actions';
+  const del=document.createElement('button');del.className='btn small delete';del.textContent='মুছে ফেলুন';del.onclick=()=>{if(confirm('এই পণ্যটি মুছে ফেলবেন?')){products=products.filter(x=>x.id!==p.id);localStorage.setItem(KEY,JSON.stringify(products));render()}};
+  actions.append(del);info.append(category,title,desc,price,stock,actions);card.append(photo,info);$('products').append(card);
+ });
+}
+$('productForm').addEventListener('submit',e=>{
+ e.preventDefault();const file=$('photo').files[0];
+ const add=photo=>{products.unshift({id:Date.now(),name:$('name').value.trim(),price:Number($('price').value),category:$('category').value,description:$('description').value.trim(),photo});save();$('productForm').reset();render()};
+ if(file){if(file.size>1200000){showNotice('অনুগ্রহ করে ১.২ MB-এর কম আকারের ছবি ব্যবহার করুন।');return}const reader=new FileReader();reader.onload=()=>add(reader.result);reader.readAsDataURL(file)}else add('');
+});
+$('search').addEventListener('input',render);$('filter').addEventListener('change',render);
+$('year').textContent=new Date().getFullYear().toLocaleString('bn-BD');render();
+</script>
+</body>
+</html>
